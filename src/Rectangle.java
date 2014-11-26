@@ -8,12 +8,10 @@ public class Rectangle extends Shape{
        return "";
     }
 
-    @Override
     public double area() {
         return 0;
     }
 
-    @Override
     public double perimitter() {
         return 0;
     }
