@@ -1,8 +1,21 @@
+import TurtleGraphics.*;
+import BreezySwing.*;
+import java.awt.Color;
 public class ShapeMaker extends javax.swing.JFrame {
 
-
+    Pen p;
+    Shape shape;
+    int size, x, y;
     public ShapeMaker() {
         initComponents();
+        SketchPadWindow window = new SketchPadWindow(400, 400);
+        size = 40;
+        x = 0;
+        y = 0;
+        p = new StandardPen(window);
+        shape = new Circle(x, y, size);
+        window.setLocation(5, 275);
+        shape.draw(p);
     }
 
 
@@ -13,13 +26,13 @@ public class ShapeMaker extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jbCircle = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnWheel = new javax.swing.JButton();
+        btnSquare = new javax.swing.JButton();
+        btnTriangle = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        btnMove = new javax.swing.JButton();
+        btnResize = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -32,12 +45,32 @@ public class ShapeMaker extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jbCircle.setText("Circle");
+        jbCircle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCircleActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Wheel");
+        btnWheel.setText("Wheel");
+        btnWheel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnWheelActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Rectangle");
+        btnSquare.setText("Square");
+        btnSquare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSquareActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Triangle");
+        btnTriangle.setText("Triangle");
+        btnTriangle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTriangleActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -47,11 +80,11 @@ public class ShapeMaker extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jbCircle)
                 .addGap(26, 26, 26)
-                .addComponent(jButton2)
+                .addComponent(btnWheel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(btnSquare)
                 .addGap(34, 34, 34)
-                .addComponent(jButton4)
+                .addComponent(btnTriangle)
                 .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
@@ -60,19 +93,34 @@ public class ShapeMaker extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCircle)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(btnWheel)
+                    .addComponent(btnSquare)
+                    .addComponent(btnTriangle))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton5.setText("Move");
+        btnMove.setText("Move...");
+        btnMove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("Resize");
+        btnResize.setText("Resize...");
+        btnResize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResizeActionPerformed(evt);
+            }
+        });
 
-        jButton7.setText("Rotate");
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -80,22 +128,22 @@ public class ShapeMaker extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnResize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton5)
+                .addComponent(btnMove)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton6)
+                .addComponent(btnResize)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton7)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addComponent(btnReset)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel2.setText("Options");
@@ -140,7 +188,7 @@ public class ShapeMaker extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -148,6 +196,52 @@ public class ShapeMaker extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbCircleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCircleActionPerformed
+        erase();
+        shape = new Circle(x, y, size);
+        shape.draw(p);
+    }//GEN-LAST:event_jbCircleActionPerformed
+
+    private void btnWheelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWheelActionPerformed
+        erase();
+        shape = new Wheel(x, y, size);
+        shape.draw(p);
+    }//GEN-LAST:event_btnWheelActionPerformed
+
+    private void btnSquareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSquareActionPerformed
+        erase();
+        shape = new Square(x, y, size);
+        shape.draw(p);
+    }//GEN-LAST:event_btnSquareActionPerformed
+
+    private void btnTriangleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTriangleActionPerformed
+        erase();
+        shape = new Triangle(x, y, size);
+        shape.draw(p);
+    }//GEN-LAST:event_btnTriangleActionPerformed
+
+    private void btnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMoveActionPerformed
+
+    private void btnResizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResizeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnResizeActionPerformed
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        x = 0;
+        y = 0;
+        size = 40;
+    }//GEN-LAST:event_btnResetActionPerformed
+    private void erase(){
+        p.setWidth(1000);
+        p.up();
+        p.move(0, 0);
+        p.setColor(Color.white);
+        p.down();
+        // Ensure a mark is made
+        p.move(0, 1);
+    }
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -180,12 +274,12 @@ public class ShapeMaker extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton btnMove;
+    private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnResize;
+    private javax.swing.JButton btnSquare;
+    private javax.swing.JButton btnTriangle;
+    private javax.swing.JButton btnWheel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
