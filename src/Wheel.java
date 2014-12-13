@@ -6,7 +6,13 @@ public class Wheel extends Circle{
         super(x, y, radius);
     }
     public String toString(){
-        return "";
+        String rs = "This is a wheel.";
+        rs += "\nRadius = " + this.Size;
+        rs += "\nSpokes = 6";
+        rs += "\nX-Y Position = (" + this.xPos + ", " + this.yPos + ")";
+        rs += "\nArea = " + area();
+        rs += "\nCircumference = " + perimeter();
+        return rs;
     }
     public void draw(Pen p){
         super.draw(p);
@@ -22,5 +28,11 @@ public class Wheel extends Circle{
             p.up();
             p.move(this.xPos, this.yPos);
         }
+    }
+    public double area(){
+        return super.area();
+    }
+    public double perimeter(){
+        return super.perimeter();
     }
 }

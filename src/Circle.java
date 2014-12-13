@@ -6,7 +6,12 @@ public class Circle extends Shape{
         super(x, y, radius);
     }
     public String toString() {
-        return "";
+        String rs = "This is a circle.";
+        rs += "\nRadius = " + this.Size;
+        rs += "\nX-Y Position = (" + this.xPos + ", " + this.yPos + ")";
+        rs += "\nArea = " + area();
+        rs += "\nCircumference = " + perimeter();
+        return rs;
     }
     public void draw(Pen p){
         double side = 2.0*Math.PI*this.Size/120.0;
@@ -23,11 +28,11 @@ public class Circle extends Shape{
     }
 
     public double area() {
-        return 0;
+        return Math.PI*this.Size*this.Size;
     }
 
-    public double perimitter() {
-        return 0;
+    public double perimeter() {
+        return this.Size*2*Math.PI;
     }
     
 }

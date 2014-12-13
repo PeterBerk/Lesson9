@@ -1,6 +1,7 @@
 import TurtleGraphics.*;
 import BreezySwing.*;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 public class ShapeMaker extends javax.swing.JFrame {
 
     Pen p;
@@ -16,6 +17,7 @@ public class ShapeMaker extends javax.swing.JFrame {
         shape = new Circle(x, y, size);
         window.setLocation(5, 275);
         shape.draw(p);
+        JT.setText(shape.toString());
     }
 
 
@@ -35,7 +37,7 @@ public class ShapeMaker extends javax.swing.JFrame {
         btnReset = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        JT = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -148,9 +150,9 @@ public class ShapeMaker extends javax.swing.JFrame {
 
         jLabel2.setText("Options");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        JT.setColumns(20);
+        JT.setRows(5);
+        jScrollPane1.setViewportView(JT);
 
         jLabel3.setText("Shape Data");
 
@@ -200,38 +202,56 @@ public class ShapeMaker extends javax.swing.JFrame {
         erase();
         shape = new Circle(x, y, size);
         shape.draw(p);
+        JT.setText(shape.toString());
     }//GEN-LAST:event_jbCircleActionPerformed
 
     private void btnWheelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWheelActionPerformed
         erase();
         shape = new Wheel(x, y, size);
         shape.draw(p);
+        JT.setText(shape.toString());
     }//GEN-LAST:event_btnWheelActionPerformed
 
     private void btnSquareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSquareActionPerformed
         erase();
         shape = new Square(x, y, size);
         shape.draw(p);
+        JT.setText(shape.toString());
     }//GEN-LAST:event_btnSquareActionPerformed
 
     private void btnTriangleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTriangleActionPerformed
         erase();
         shape = new Triangle(x, y, size);
         shape.draw(p);
+        JT.setText(shape.toString());
     }//GEN-LAST:event_btnTriangleActionPerformed
 
     private void btnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveActionPerformed
-        // TODO add your handling code here:
+        x = Integer.parseInt(JOptionPane.showInputDialog(this, "Enter X position:", "0"));
+        y = Integer.parseInt(JOptionPane.showInputDialog(this, "Enter Y position:", "0"));
+        erase();
+        shape.move(x, y);
+        shape.draw(p);
+        JT.setText(shape.toString());
     }//GEN-LAST:event_btnMoveActionPerformed
 
     private void btnResizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResizeActionPerformed
-        // TODO add your handling code here:
+        size = Integer.parseInt(JOptionPane.showInputDialog(this, "Enter new size:", "40"));
+        erase();
+        shape.setSize(size);
+        shape.draw(p);
+        JT.setText(shape.toString());
     }//GEN-LAST:event_btnResizeActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         x = 0;
         y = 0;
         size = 40;
+        erase();
+        shape.setSize(size);
+        shape.move(x, y);
+        shape.draw(p);
+        JT.setText(shape.toString());
     }//GEN-LAST:event_btnResetActionPerformed
     private void erase(){
         p.setWidth(1000);
@@ -274,6 +294,7 @@ public class ShapeMaker extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea JT;
     private javax.swing.JButton btnMove;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnResize;
@@ -286,7 +307,6 @@ public class ShapeMaker extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton jbCircle;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,7 +1,16 @@
-public class EmployeeInterface extends javax.swing.JFrame {
 
+import java.text.NumberFormat;
+import javax.swing.JOptionPane;
+
+public class EmployeeInterface extends javax.swing.JFrame {
+    Employee employees[];
+    int size;
+    NumberFormat numform;
     public EmployeeInterface() {
         initComponents();
+        employees = new Employee[10];
+        size = 0;
+        numform = NumberFormat.getCurrencyInstance();
     }
 
     @SuppressWarnings("unchecked")
@@ -66,12 +75,26 @@ public class EmployeeInterface extends javax.swing.JFrame {
         jLabel4.setText("Employee Type");
 
         jbAdd.setText("Add");
+        jbAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAddActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
                 "Name", "Pay"
@@ -186,6 +209,77 @@ public class EmployeeInterface extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddActionPerformed
+        Employee construct;
+        String type, name;
+        int hours = 0;
+        double rate = 0;
+        boolean typeValid = true;
+        boolean nameValid = true;
+        boolean rateValid = true;
+        boolean hoursValid = true;
+        if (jrbFull.isSelected()){type = "Fulltime";}
+        else if (jrbPart.isSelected()){type = "Parttime";}
+        else{
+            JOptionPane.showMessageDialog(this, "Employee type not selected");
+            typeValid = false;
+            type = "";
+        }
+        try{name = jtName.getText();}
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Name not valid");
+            nameValid = false;
+            name = "";
+        }
+                
+        try{rate = Double.parseDouble(jtRate.getText());}
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Rate not valid");
+            rateValid = false;
+        }
+        finally{
+            if (rateValid){
+                if (rate<6.75||rate>30.5){
+                    JOptionPane.showMessageDialog(this, "Rate must be between 6.75 and 30.50");
+                    rateValid = false;
+                }
+            }
+        }
+        
+        try{hours = Integer.parseInt(jtHours.getText());}
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Hours not valid");
+            hoursValid = false;
+        }
+        finally{
+            if (hoursValid){
+                if (hours<1||hours>60){
+                    JOptionPane.showMessageDialog(this, "Hours must be between 1 and 60");
+                    hoursValid = false;
+                }
+            }
+        }
+        if (typeValid&&nameValid&&rateValid&&hoursValid){
+            if (type.equals("Fulltime")){
+                employees[size] = new FullTimeEmployee(name, rate, hours);    
+            }
+            else{
+                employees[size] = new PartTimeEmployee(name, rate, hours);
+            }
+            System.out.println(employees[size]);
+            
+            jTable1.setValueAt(employees[size].getName(), size, 0);
+            jTable1.setValueAt(employees[size].getPay(), size, 1);
+            jtTotalPay.setText(numform.format(Employee.getTotalPay()));
+            size++;
+            jtName.setText("");
+            jtRate.setText("");
+            jtHours.setText("");
+            buttonGroup1.clearSelection();
+        }
+        
+    }//GEN-LAST:event_jbAddActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

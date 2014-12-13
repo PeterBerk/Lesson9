@@ -6,15 +6,20 @@ public class Triangle extends Shape{
         super(x, y, size);
     }
     public String toString() {
-        return "";
+        String rs = "This is a triangle.";
+        rs += "\nSize = " + this.Size;
+        rs += "\nX-Y Position = (" + this.xPos + ", " + this.yPos + ")";
+        rs += "\nArea = " + area();
+        rs += "\nPerimeter = " + perimeter();
+        return rs;
     }
 
     public double area() {
-        return 0;
+        return this.Size*this.Size/2;
     }
 
-    public double perimitter() {
-        return 0;
+    public double perimeter() {
+        return this.Size*3;
     }
     public void draw(Pen p){
         p.up();
