@@ -270,6 +270,9 @@ public class EmployeeInterface extends javax.swing.JFrame {
             System.out.println(employees[size]);
             
             jTable1.setValueAt(employees[size].getName(), size, 0);
+            // Java was throwing errors whenever I tried to format the pay.
+            // To make it even worse, it didn't even link to the problem
+            // line of code.
             jTable1.setValueAt(employees[size].getPay(), size, 1);
             jtTotalPay.setText(numform.format(Employee.getTotalPay()));
             size++;
